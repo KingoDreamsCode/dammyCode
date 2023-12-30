@@ -1,0 +1,144 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FET-Project Retrieval System</title>
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'images/background.jpg' %}">
+<style>
+
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+    body{
+        padding-top: 100px;
+        justify-content: center;
+        align-items: center;
+        font-family: tahoma;
+        height: 100vh;
+    }
+    .login{
+        align-items: center;
+        margin: auto;
+        width: 400px;
+        height: 450px;
+        background-color: #e5e5e5;
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.3);
+
+    }
+    .login:before {
+        content: "";
+        position: absolute;
+        top: -15px;
+        left: -15px;
+        pointer-events: none;
+        z-index: -1;
+      }
+    h1{
+        text-align: center;
+        padding-top: 20px;
+        font-size: 30px;
+        color: #fff;
+    }
+    h2{
+        text-align: center;
+        color: #fff;
+    }
+    form{
+        align-items: center;
+        width: 300px;
+        margin-left: 20px;
+    }
+    form label{
+        display: flex;
+        margin-top: 20px;
+        font-size: 15px;
+    }
+    form input{
+        width: 350px;
+        padding: 7px;
+        border: none;
+        border: 2px solid grey;
+        border-radius: 20px;
+        outline: none;
+        border-color: #0a1930;
+        align-items: center;
+    }
+    input[type= "submit"]{
+        width: 350px;
+        height: 35px;
+        margin-top: 20px;
+        border: none;
+        background-color: #0a1930;
+        border-radius: 20px;
+        color: white;
+    }
+    .btn-login:hover {
+        background-color: #ff7722;
+      }
+    input[type= "checkbox"]{
+        width: 15px;
+        height: 15px;
+        border: none;
+        background-color: #0a1930;
+    }
+    .para2 a{
+        color: #ff7722;
+        margin-top: 100px;
+        align-items: center;
+        text-decoration: none;
+    }
+    .para3{
+        text-align: center;
+        color: white;
+        font-size: 15px;
+        margin-top: 5px;
+    }
+    .para3 a{
+        padding-bottom: 3px;
+        color: #ff7722;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+    
+    }
+    h5{
+        color: #ff7722;
+        font-size: 20px;
+    }
+</style>
+    
+
+</head>
+<body style = "background:linear-gradient(50deg, rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('{%static 'images/login.jpg' %}');">
+    <div class = "container">
+        <div class="login">
+            <h1>LOGIN</h1><br>
+            <h2><a style = "color: #fff; text-decoration: none" href="/"><span >PROJECT</span><span style ="color: #ff7722">HUB</span></a></h2>
+            {%for message in messages%}
+            <h5>{{message}}</h5>
+            {% endfor %}
+            <form action=" " method = "post">
+                {% csrf_token %}
+                <label style = "color: #fff"for=""> Email</label>
+                <input type="email" id = "email" name = "email" placeholder="Email" required>
+                <label  style = "color: #fff" for="">Password</label>
+                <input type="password" id = "password" name = "password" placeholder="Password" required>
+                <label  style = "color: #fff" for = "myCheckbox"><input type = "checkbox">Remeber Me</label>
+                <input type="submit" value="Submit" class = "btn-login"><br>
+                <br>
+                <p class = "para2"> <a href="{% url 'signup' %}">Forgot Password?</a></p>
+            </form>
+            <p class="para3"> Do not have an account? <a href="{% url 'signup' %}">Sign Up Here</a></p>
+        </div>
+    </div>
+</body>
+</html>
