@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FET-Project Retrieval System</title>
-    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/logo33.jpeg' %}">
     <link rel="stylesheet" href="{% static 'images/background.jpg' %}">
 <style>
 
@@ -118,26 +118,17 @@
     
 
 </head>
-<body style = "background:linear-gradient(50deg, rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('{%static 'images/login.jpg' %}');">
+<body style = "background:linear-gradient(50deg, rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('{%static 'img/ph5.jpg' %}'); background-repeat: none;">
     <div class = "container">
         <div class="login">
-            <h1>LOGIN</h1><br>
-            <h2><a style = "color: #fff; text-decoration: none" href="/"><span >PROJECT</span><span style ="color: #ff7722">HUB</span></a></h2>
-            {%for message in messages%}
-            <h5>{{message}}</h5>
-            {% endfor %}
+            <h1>LOGOUT</h1><br>
+            <h2><a style = "color: #fff; text-decoration: none" href="/"><span >PROJECT</span><span style ="color: #007bff;">HUB</span></a></h2>
             <form action=" " method = "post">
                 {% csrf_token %}
-                <label style = "color: #fff"for=""> Email</label>
-                <input type="email" id = "email" name = "email" placeholder="Email" required>
-                <label  style = "color: #fff" for="">Password</label>
-                <input type="password" id = "password" name = "password" placeholder="Password" required>
-                <label  style = "color: #fff" for = "myCheckbox"><input type = "checkbox">Remeber Me</label>
-                <input type="submit" value="Submit" class = "btn-login"><br>
-                <br>
-                <p class = "para2"> <a href="{% url 'signup' %}">Forgot Password?</a></p>
+                <p class = "para2"> Are you sure You want to Logout?</p><br>
+                <p class = "para2"> <a href="{% url 'signup' %}">Yes Logout</a></p>
+                <input type="submit" value="Submit" class = "btn-login">
             </form>
-            <p class="para3"> Do not have an account? <a href="{% url 'signup' %}">Sign Up Here</a></p>
         </div>
     </div>
 </body>

@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FET-Project Retrieval System</title>
+    <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+</head>
+<body>
+    <header>
+        <h1>About Us</h1>
+    </header>
+    <main>
+        <p class="about-para">We are group 9 of the software development tools.</p>
+        <section class="team-members">
+          <h2>Our Team</h2>
+          <ul class="member-list">
+            <li>
+                <h3>TIDDING RAMSEY BINDA</h3>
+                <P class="role">Front-end Developer</P>
+            </li>
+            <li>
+                <h3>KINGO KINGSLEY</h3>
+                <P class="role">Back-end Developer</P>
+            </li>
+            <li>
+                <h3>TIWA DELAN</h3>
+                <P class="role">Project Manager</P>
+            </li>
+            <li>
+                <h3>AGBOR EMMANUEL</h3>
+                <P class="role">Back-end Developer</P>
+            </li>
+            <li>
+                <h3>BEH CHU NELSON</h3>
+                <P class="role">Designer (UI/UX)</P>
+            </li>
+            <li>
+                <h3>EYONG GODWILL</h3>
+                <P class="role">Designer (UI/UX)</P>
+            </li>
+            <li>
+                <h3>LUM BLESSING</h3>
+                <P class="role">Designer (UI/UX)</P>
+            </li>
+            <li>
+                <h3>ARRAY TABOT</h3>
+                <P class="role">Designer (UI/UX)</P>
+            </li>
+            <li>
+                <h3>OBI OBI JR</h3>
+                <P class="role">Front-end Developer</P>
+            </li>
+            <li>
+                <h3>ARRAY EBUNAW</h3>
+                <P class="role">Textual writing and Documentation</P>
+            </li>
+            <li>
+                <h3>AGBOR COMFORT</h3>
+                <P class="role">Textual writing and Documentation</P>
+            </li>
+            <li>
+                <h3>EFUETLATEH JOAN</h3>
+                <P class="role">Textual writing and Documentation</P>
+            </li>
+          </ul>
+        </section>
+    </main>
+    <footer>
+        <div id="year">&copy; <span id="displayYear"></span> All Rights Reserved</div>
+    </footer>
+    <script>
+        // Function to get the current year
+              function getYear() {
+                  var currentDate = new Date();
+                  var currentYear = currentDate.getFullYear();
+                  document.querySelector("#displayYear").textContent = currentYear;
+              }
+    
+              // Calling the getYear() function to update the year
+              getYear();
+    
+              // Function to initialize the Google Map
+              function myMap() {
+                  var doualaLatitude = 4.051056; // Latitude of Douala, Cameroon
+                  var doualaLongitude = 9.767868; // Longitude of Douala, Cameroon
+              
+                  var mapProp = {
+                      center: new google.maps.LatLng(doualaLatitude, doualaLongitude),
+                      zoom: 18
+                  };
+                  var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+              }
+       </script>
+</body>
+</html>

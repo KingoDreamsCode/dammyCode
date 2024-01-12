@@ -12,14 +12,44 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
 from .models import Blog
+from .models import Room, Message
+from .models import ContactForm
+from django.core.mail import send_mail
+from django.views.decorators.csrf import csrf_exempt
+
 
 
 def index(request):
     blogs = Blog.objects.all()
     return render(request, 'index.html', {'blogs': blogs})
+    
+def  home(request):
+    return render(request, 'home.html')
+
+def  room(request, room):
+    return render(request, 'room.html')
+
+def  checkview(request):
+    room = request.POST['room_name']
+    username = request.POST['username']
+
+    if  Room.objects.filter(name= room).exists():
+            return redirect('/' +room+ '/?username = '+username)
+
+    else:
+        new_room = Room.objects.create(name = room)
+        new_room.save()
+        return redirect('/' +room+ '/?username = '+username)
+
 
 def shop(request):
     return render(request, 'shop.html')
+
+def about(request):
+    return render(request, 'about.html')
+
+def payment(request):
+    return render(request, 'payment.html')
 
 def login_view(request):
     if request.method == "POST":
@@ -41,6 +71,7 @@ def signup(request):
     if request.method == "POST":
         print(request.POST)  
         email = request.POST['email']
+        username = request.POST['username']
         fname = request.POST['fname']
         lname = request.POST['lname']
         password = request.POST['password']
@@ -75,9 +106,15 @@ def signup(request):
                 messages.error(request, "Email already used")
                 return redirect('signup')
             
+            if User.objects.filter(username=username).exists():
+                messages.error(request, "Username already used")
+                return redirect('signup')
+
+            
             user = User.objects.create_user(email=email, password=password)
             user.first_name = fname
             user.last_name = lname
+            user.username = username
             user.save()
             
             messages.success(request, "Your account has been created successfully")
@@ -125,5 +162,40 @@ def pdf_list(request):
     return render(request, 'shop.html', context)
 
 def logout_view(request):
-    logout(request)
-    return redirect('index')
+    if request.method == "POST":
+        logout(request)
+        return redirect("/login/")
+    return render(request, "logout.html", {})
+
+def sub(request):
+    return render(request, 'sub.html')
+
+def projects(request, pk):
+        pdf_files = PDFFile.objects.get(id = pk)
+        return render(request, 'projects.html', { 'pdf_file' : pdf_files } ) 
+
+
+@csrf_exempt
+def contact_form_view(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        # Send email
+        subject = 'Leave Us A Message'
+        email_body = f'Name: {name}\nEmail: {email}\nMessage: {message}'
+        sender_email = 'kingokingsleykaah@gmail.com'
+        receiver_email = email
+
+        send_mail(subject, email_body, sender_email, [receiver_email], fail_silently=False)
+
+        # Send confirmation email to the user
+        confirmation_subject = 'Thank you for contacting us'
+        confirmation_message = 'Thank you for your message. We will Review your message and get back to you.'
+        send_mail(confirmation_subject, confirmation_message, sender_email, [email], fail_silently=False)
+
+        # Render the index.html template or redirect to a thank you page
+        return render(request, 'index.html')
+
+    return render(request, 'index.html')

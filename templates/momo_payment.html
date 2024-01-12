@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Make Payment</title>
+</head>
+<body style="background-color: #fffdd0e9;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding:70px; 
+">
+  <div class="container">
+    <div class="header">
+      <h1><span class="wash">WASH</span><span class="beta">BETA</span></h1>
+    </div>
+    <div class="payment-form">
+      <h2>Payment Details</h2>
+      <form id="paymentForm">
+        <div class="form-group">
+          <label for="firstName">First Name:</label>
+          <input type="text" id="firstName" required>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name:</label>
+          <input type="text" id="lastName" required>
+        </div>
+        <div class="form-group">
+          <label for="telephone">Telephone:</label>
+          <input type="tel" id="telephone" required>
+        </div>
+        <div class="form-group">
+          <label for="address">Address:</label>
+          <input type="text" id="address" required>
+        </div>
+        <button type="submit" class="make-payment-btn">Make Payment</button>
+      </form>
+    </div>
+  </div>
+
+  
+</body>
+</html>
+<style>
+  /* styles.css */
+
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.wash {
+  position: absolute;
+  top: 28px;
+  left: 180px;
+  text-shadow: 0px 4px 4px #00000040;
+  font-family: "Inter-ExtraBold", Helvetica;
+  font-weight: 800;
+  color: #ffffff;
+  font-size: 24px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.beta {
+  position: absolute;
+  top: 30px;
+  left: 256px;
+  text-shadow: 0px 4px 4px #00000040;
+  font-family: "Inter-ExtraBold", Helvetica;
+  font-weight: 800;
+  color: #057bbe;
+  font-size: 24px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.payment-method {
+  margin-top: 50px;
+}
+
+.payment-options {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.payment-options a {
+  margin: 0 10px;
+}
+
+.payment-form {
+  margin-top: 50px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="tel"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.make-payment-btn {
+  padding: 10px 20px;
+  background-color: #ffc107;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.make-payment-btn:hover {
+  background-color: #e0a800;
+}
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  text-align: center;
+}
+
+.popup h3 {
+  margin-top: 0;
+}
+
+.popup p {
+  margin-bottom: 10px;
+}
+
+.popup button {
+  padding: 10px 20px;
+  background-color: #ffc107;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background-color: #e0a800;
+}
+</style>
+<script>
+  const paymentForm = document.getElementById('paymentForm');
+paymentForm.addEventListener('submit', handlePayment);
+
+function handlePayment(e) {
+  e.preventDefault();
+
+  const firstName = document.getElementById('firstName').value;
+  const lastName = document.getElementById('lastName').value;
+  const telephone = document.getElementById('telephone').value;
+  const address = document.getElementById('address').value;
+  const amount = 5000; // Replace with the actual amount from the cart page
+
+  const paymentInfo = {
+    firstName,
+    lastName,
+    telephone,
+    address,
+    amount
+  };
+
+  displayPaymentPopup(paymentInfo);
+}
+
+function displayPaymentPopup(paymentInfo) {
+  const { lastName, telephone, amount } = paymentInfo;
+  const momoName = "VINCENT DE PAUL";
+  const momoNumber = '650970358'; // Replace with the actual MoMo number
+  
+  const popupContent = `
+    <h3>Payment Details</h3>
+    <p><strong>Name:</strong> ${momoName}</p>
+    <p><strong>MoMo Number:</strong> ${momoNumber}</p>
+    <p><strong>Amount:</strong> ${amount}</p>
+    <button onclick="proceedToDial()">Proceed</button>
+  `;
+
+  const popup = document.createElement('div');
+  popup.className = 'popup';
+  popup.innerHTML = popupContent;
+
+  document.body.appendChild(popup);
+}
+
+function proceedToDial() {
+  const momoNumber = '650970358'; // Replace with the actual MoMo number
+  const amount = 5000; // Replace with the actual amount from the cart page
+  const dialCode = `*126*9*${momoNumber}*${amount}#`;
+
+  // Open the dialer with the specified code
+  window.open(`tel:${dialCode}`);
+}
+</script>
