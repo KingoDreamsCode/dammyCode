@@ -1,1 +1,1 @@
-web: gunicorn PK.wsgi
+web: gunicorn PK.wsgi --log-file -
